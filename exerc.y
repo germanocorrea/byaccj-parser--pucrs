@@ -56,7 +56,7 @@ Cmd : Bloco
     | if '(' E ')' Cmd
     | if '(' E ')' Cmd else Cmd
     | while '(' E ')' Cmd
-    |  E
+    |  E ';'
     ;
 
 E : E '=' E
