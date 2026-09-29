@@ -1,7 +1,7 @@
 %{
   import java.io.*;
 %}
-   
+
 
 %token IF, DO, TO, THEN, ELSE, BY, endif, num, ident
 
@@ -9,31 +9,65 @@
 %left '*' '/'
 
 %%
- 
-Prog :  Bloco
+
+Prog :  Decl ListaFuncoes
     ;
 
-Bloco : '{' LCmd '}'
-      ;
+Decl : Tipo LId ';' Decl
+    |
+    ;
 
-LCmd : LCmd  C
-     |       // vazio
-     ;
+Tipo : int
+    | double
+    | boolean
+    ;
 
-C : ident '=' E ';'
-  | IF '(' E ')' THEN C endif
-  | IF '(' E ')' THEN C ELSE C endif  
-  ;
+LId : LId ',' IDENT
+    | IDENT
+    ;
+
+ListaFuncoes : ListaFuncoes Funcao
+    |
+    ;
+
+Funcao : TipoOuVoid ident '('ListaParametrosOuVazio ')' Bloco
+
+TipoOuVoid : VOID
+    | Tipo
+    ;
+
+ListaParametrosOuVazio : ListaParametros
+    |
+    ;
 
 
-E : E '+' E
-  | E '-' E
-  | E '*' E 
-  | E '/' E
-  | num
-  | ident
-;
+ListaParametros : Tipo IDENT
+    | Tipo IDENT , ListaParametros
+    ;
 
+Bloco :  '{' LCmd '}'
+
+LCmd :  Cmd LCmdo
+    |
+    ;
+
+Cmd : Bloco
+    | if ( E ) Cmd
+    | if ( E ) Cmd else Cmd
+    | while ( E ) Cmd
+    |  E
+    ;
+
+E : E = E
+    | E + E
+    | E * E
+    | E / E
+    | E > E
+    | E AND E
+    | NUM
+    | IDENT
+    | ( E )
+    ;
 
 %%
 
@@ -87,10 +121,9 @@ E : E '+' E
     }
 
     yyparser.yyparse();
-    
+
   //  if (interactive) {
       System.out.println();
       System.out.println("done!");
   //  }
   }
-
