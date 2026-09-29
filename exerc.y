@@ -5,6 +5,9 @@
 
 %token int, double, boolean, IDENT, VOID, AND, NUM, if, else, while
 
+%right '='
+%nonassoc '>'
+%left AND
 %left '+' '-'
 %left '*' '/'
 
