@@ -43,7 +43,7 @@ ListaParametrosOuVazio : ListaParametros
 
 
 ListaParametros : Tipo IDENT
-    | Tipo IDENT , ListaParametros
+    | Tipo IDENT ',' ListaParametros
     ;
 
 Bloco :  '{' LCmd '}'
@@ -53,21 +53,21 @@ LCmd :  Cmd LCmdo
     ;
 
 Cmd : Bloco
-    | if ( E ) Cmd
-    | if ( E ) Cmd else Cmd
-    | while ( E ) Cmd
+    | if '(' E ')' Cmd
+    | if '(' E ')' Cmd else Cmd
+    | while '(' E ')' Cmd
     |  E
     ;
 
-E : E = E
-    | E + E
-    | E * E
-    | E / E
-    | E > E
+E : E '=' E
+    | E '+' E
+    | E '*' E
+    | E '/' E
+    | E '>' E
     | E AND E
     | NUM
     | IDENT
-    | ( E )
+    | '(' E ')'
     ;
 
 %%
