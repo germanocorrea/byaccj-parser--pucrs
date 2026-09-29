@@ -3,7 +3,7 @@
 %}
 
 
-%token IF, DO, TO, THEN, ELSE, BY, endif, num, ident
+%token int, double, boolean, IDENT, VOID, AND, NUM, if, else, while
 
 %left '+' '-'
 %left '*' '/'
@@ -30,7 +30,7 @@ ListaFuncoes : ListaFuncoes Funcao
     |
     ;
 
-Funcao : TipoOuVoid ident '(' ListaParametrosOuVazio ')' Bloco
+Funcao : TipoOuVoid IDENT '(' ListaParametrosOuVazio ')' Bloco
     ;
 
 TipoOuVoid : VOID
@@ -48,7 +48,7 @@ ListaParametros : Tipo IDENT
 
 Bloco :  '{' LCmd '}'
 
-LCmd :  Cmd LCmdo
+LCmd :  Cmd LCmd
     |
     ;
 
