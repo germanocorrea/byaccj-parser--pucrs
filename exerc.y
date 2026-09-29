@@ -30,7 +30,8 @@ ListaFuncoes : ListaFuncoes Funcao
     |
     ;
 
-Funcao : TipoOuVoid ident '('ListaParametrosOuVazio ')' Bloco
+Funcao : TipoOuVoid ident '(' ListaParametrosOuVazio ')' Bloco
+    ;
 
 TipoOuVoid : VOID
     | Tipo
