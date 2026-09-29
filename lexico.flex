@@ -20,12 +20,8 @@ NL  = \n | \r | \r\n
 "$TRACE_OFF" { yyparser.setDebug(false); }
 
 if { return Parser.IF;}
-do { return Parser.DO; }
-to { return Parser.TO; }
-then { return Parser.THEN;}
 else { return Parser.ELSE;}
-by { return Parser.BY;} 
-endif { return Parser.endif;}
+while { return Parser.WHILE;}
 
 [0-9]+ { return Parser.num;}
 [a-zA-Z][a-zA-Z0-9]* { return Parser.ident;}
@@ -36,18 +32,14 @@ endif { return Parser.endif;}
 "(" |
 ")" |
 ";" |
+"," |
+">" |
 "*" |
 "/" |
 "+" |
 "-"     { return (int) yycharat(0); }
 
 [ \t]+ { }
-{NL}+  { } 
+{NL}+  { }
 
 .    { System.err.println("Error: unexpected character '"+yytext()+"' na linha "+yyline); return YYEOF; }
-
-
-
-
-
-
