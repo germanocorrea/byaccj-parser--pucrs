@@ -3,7 +3,7 @@
 %}
 
 
-%token int, double, boolean, IDENT, VOID, AND, NUM, if, else, while
+%token INT, DOUBLE, BOOLEAN, IDENT, VOID, AND, NUM, IF, ELSE, WHILE
 
 %right '='
 %nonassoc '>'
@@ -20,9 +20,9 @@ Decl : Tipo LId ';' Decl
     |
     ;
 
-Tipo : int
-    | double
-    | boolean
+Tipo : INT
+    | DOUBLE
+    | BOOLEAN
     ;
 
 LId : LId ',' IDENT
@@ -56,9 +56,9 @@ LCmd :  Cmd LCmd
     ;
 
 Cmd : Bloco
-    | if '(' E ')' Cmd
-    | if '(' E ')' Cmd else Cmd
-    | while '(' E ')' Cmd
+    | IF '(' E ')' Cmd
+    | IF '(' E ')' Cmd ELSE Cmd
+    | WHILE '(' E ')' Cmd
     |  E ';'
     ;
 
