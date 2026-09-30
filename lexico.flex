@@ -10,6 +10,10 @@
     this(r);
     this.yyparser = yyparser;
   }
+
+  public int getLine() {
+    return yyline;
+  }
 %}
 
 NL  = \n | \r | \r\n

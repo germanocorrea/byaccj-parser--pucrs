@@ -76,6 +76,7 @@ E : E '=' E
 %%
 
   private Yylex lexer;
+  private int lines = 0;
 
 
   private int yylex () {
@@ -83,6 +84,7 @@ E : E '=' E
     try {
       yylval = new ParserVal(0);
       yyl_return = lexer.yylex();
+      lines += lexer.getLine();
     }
     catch (IOException e) {
       System.err.println("IO error :"+e.getMessage());
@@ -92,7 +94,7 @@ E : E '=' E
 
 
   public void yyerror (String error) {
-    System.err.println ("Error: " + error);
+    System.err.println ("Error: " + error + " on char: " + yychar + ", on line " + lines);
   }
 
 
