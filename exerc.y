@@ -13,11 +13,12 @@
 
 %%
 
-Prog :  Decl ListaFuncoes
+Prog : Tipo IDENT Resto
     ;
 
-Decl : Tipo LId ';' Decl
-    |
+Resto : ';' Prog
+    | ',' LId ';' Prog
+    | '(' ListaParametrosOuVazio ')' Bloco ListaFuncoes
     ;
 
 Tipo : INT
