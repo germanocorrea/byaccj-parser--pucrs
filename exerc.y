@@ -14,6 +14,7 @@
 %%
 
 Prog : Tipo IDENT Resto
+    | VOID IDENT Resto
     ;
 
 Resto : ';' Prog
